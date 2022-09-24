@@ -1,6 +1,7 @@
 name: tsa
 channels:
   - defaults
+  - conda-forge
 dependencies:
   - bzip2=1.0.8=h1de35cc_0
   - ca-certificates=2022.07.19=hecd8cb5_0
@@ -20,21 +21,5 @@ dependencies:
   - xz=5.2.5=hca72f7f_1
   - zlib=1.2.12=h4dc903c_3
   - pip:
-    - contourpy==1.0.5
-    - cycler==0.11.0
-    - fonttools==4.37.3
-    - kiwisolver==1.4.4
-    - matplotlib==3.6.0
-    - numpy==1.23.3
-    - packaging==21.3
-    - pandas==1.5.0
-    - patsy==0.5.2
-    - pillow==9.2.0
-    - pyparsing==3.0.9
-    - python-dateutil==2.8.2
-    - pytz==2022.2.1
-    - scipy==1.9.1
-    - seaborn==0.12.0
-    - six==1.16.0
-    - statsmodels==0.13.2
+    - -r requirements.txt
 prefix: /Users/patrickdasilva/anaconda3/envs/tsa
