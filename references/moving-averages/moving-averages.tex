@@ -1,0 +1,917 @@
+\documentclass[11 pt]{article}
+
+%%%%% AMS Math packages and more %%%%%
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsopn}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{needspace}
+\usepackage{extpfeil}
+\usepackage{fullpage}
+\usepackage[framemethod=tikz]{mdframed}
+\usepackage[margin=0.3in]{geometry}
+
+%%%%% Commutative Diagram Package %%%%%
+
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{arrows}
+
+%%%%% Analysis %%%%% 
+
+\newcommand{\argmin}{\operatorname{\mathrm{argmin}}}
+\newcommand{\argmax}{\operatorname{\mathrm{argmax}}}
+
+%%%%% Symbols and expressions %%%%%
+
+\newcommand{\1}{\operatorname{\mathbb I}}
+\newcommand{\R}{\operatorname{\mathbb R}}
+\newcommand{\N}{\operatorname{\mathbb N}}
+\newcommand{\Z}{\operatorname{\mathbb Z}}
+\newcommand{\F}{\operatorname{\mathbb F}}
+\newcommand{\Q}{\operatorname{\mathbb Q}}
+\newcommand{\C}{\operatorname{\mathbb C}}
+\newcommand{\A}{\operatorname{\mathbb A}}
+\newcommand{\PP}{\operatorname{\mathbb P}}
+\newcommand{\ZNZ}[1]{\Z \! / {#1} \! \Z}
+\newcommand{\QZ}{\Q \! / \! \Z}
+\newcommand{\p}{\mathfrak p}
+\renewcommand{\a}{\mathfrak a}
+\renewcommand{\b}{\mathfrak b}
+\renewcommand{\c}{\mathfrak c}
+\newcommand{\dd}{\mathfrak d}
+\newcommand{\m}{\mathfrak m}
+\newcommand{\n}{\mathfrak n}
+\renewcommand{\P}{\mathfrak P}
+\newcommand{\q}{\mathfrak q}
+\newcommand{\re}{\mathfrak{R}\mathrm{e}}
+\newcommand{\im}{\mathfrak{I}\mathrm{m}}
+\newcommand{\ima}{\mathrm{im} \, }
+\newcommand{\cok}{\mathrm{coker} \, }
+\newcommand{\idof}{\trianglelefteq}
+\newcommand{\NNT}[1]{\mathrm{NNT}(#1)}
+\newcommand{\NT}[1]{\mathrm{NT}(#1)}
+\newcommand{\nil}[1]{\mathrm{Nil}(#1)}
+\newcommand{\red}{\mathrm{red}}
+\newcommand{\cha}[1]{\mathrm{ch}(#1)}
+\newcommand{\Hom}[3]{\mathrm{Hom}_{#1}(#2,#3)}
+\newcommand{\Der}[3]{\mathrm{Der}_{#1}(#2,#3)}
+\newcommand{\der}[2]{\mathrm{Der}_{#1}(#2)}
+\newcommand{\HOM}{\HH \!\!\mathit{om}}
+\newcommand{\End}[2]{\mathrm{End}_{#1}(#2)}
+\newcommand{\Mat}[1]{\mathbf{Mat}(#1)}
+\newcommand{\Matmn}[3]{\mathbf{Mat}_{#1 \times #2}(#3)}
+\newcommand{\spec}[1]{\mathrm{Spec} \!\left(#1 \right)}
+\newcommand{\Spec}[1]{\mathbf{Spec} \!\left(#1 \right)}
+\newcommand{\jac}[1]{\mathrm{Jac}(#1)}
+\newcommand{\ass}[2]{\mathrm{Ass}_{#1}(#2)}
+\newcommand{\ann}[2]{\mathrm{Ann}_{#1}(#2)}
+\newcommand{\supp}[2]{\mathrm{supp}_{#1}(#2)}
+\newcommand{\Supp}[1]{\mathrm{supp}(#1)}
+\newcommand{\sing}[1]{\mathrm{Sing}(#1)}
+\newcommand{\ins}[3]{\mathrm{Ins}_{#1,#2}\left(#3\right)}
+\newcommand{\gr}[2]{\mathrm{gr}_{#1}(#2)}
+\newcommand{\grR}[1]{\mathrm{gr}(#1)}
+\newcommand{\defn}{\overset{def}{=}}
+\newcommand{\st}{\quad \text{s.t.} \quad}
+\renewcommand{\implies}{\quad \Longrightarrow \quad}
+\newcommand{\aut}{\mathrm{Aut} \,}
+\newcommand{\Aut}[2]{\mathrm{Aut}_{#1}(#2)}
+\newcommand{\cyc}[1]{\Z \! / {#1} \! \Z }
+\newcommand{\lenr}[2]{\ell_{#1} \! \left( #2 \right)}
+\newcommand{\len}[1]{\ell \left( #1 \right)}
+\newcommand{\coh}[1]{\mathfrak{Coh} \left( #1 \right)}
+\newcommand{\qco}[1]{\mathfrak{Qco} \left( #1 \right)}
+\newcommand{\LT}[1]{\mathrm{LT}(#1)}
+\newcommand{\ar}[1]{\xrightarrow{#1}}
+\newcommand{\tr}[1]{\mathrm{tr} \! \left( #1 \right)}
+\newcommand{\Mod}[1]{{#1}\mathrm{-Mod}}
+\newcommand{\MOD}{\mathrm{Mod}}
+\newcommand{\id}[1]{\mathrm{id}_{#1}}
+\newcommand{\rees}[1]{\mathcal R( #1 )}
+\newcommand{\hgt}[1]{\mathrm{ht}(#1)}
+\newcommand{\GL}[1]{\mathrm{GL}(#1)}
+\newcommand{\PGL}[1]{\mathrm{PGL}(#1)}
+\newcommand{\GLn}[2]{\mathrm{GL}_{#1}(#2)}
+\newcommand{\ord}[1]{\mathrm{ord}(#1)}
+\newcommand{\Ord}{\mathrm{ord}}
+\newcommand{\zeros}[1]{\mathcal Z \! \left( #1 \right)}
+\newcommand{\zerosp}[1]{\mathcal Z_+ \! \left( #1 \right)}
+\newcommand{\ideal}[1]{\mathcal I \! \left( #1 \right)}
+\newcommand{\Res}[2]{\mathrm{Res} \left( #1,#2 \right)}
+\newcommand{\res}[2]{\mathrm{res}_{#1,#2}}
+\newcommand{\ev}[1]{\mathrm{ev}_{#1}}
+\newcommand{\PN}[1]{\mathbb P^{#1}}
+\newcommand{\pspace}[2]{\mathbb P^{#1}(#2)}
+\newcommand{\codim}[2]{\mathrm{codim}(#1,#2)}
+\newcommand{\blowup}[2]{\mathrm{Bl}_{#1}(#2)}
+\newcommand{\maxspec}[1]{\mathrm{MaxSpec} \left( #1 \right)}
+\newcommand{\proj}[1]{\mathrm{Proj}\! \left( #1 \right)}
+\newcommand{\Proj}[1]{\mathbf{Proj}\! \left( #1 \right)}
+\newcommand{\distop}[1]{\mathcal D \!\left(#1\right)}
+\newcommand{\distopl}[1]{\mathcal D_+ \!\left(#1\right)}
+\newcommand{\AAA}{\mathscr A}
+\renewcommand{\AA}{\mathcal A}
+\newcommand{\BB}{\mathcal B}
+\newcommand{\CC}{\mathcal C}
+\newcommand{\DD}{\mathcal D}
+\newcommand{\OO}{\mathscr O}
+\newcommand{\EE}{\mathscr E}
+\newcommand{\FF}{\mathscr F}
+\newcommand{\GG}{\mathscr G}
+\newcommand{\HH}{\mathscr H}
+\newcommand{\II}{\mathscr I}
+\newcommand{\JJ}{\mathscr J}
+\newcommand{\KK}{\mathscr K}
+\newcommand{\LL}{\mathscr L}
+\newcommand{\MM}{\mathscr M}
+\newcommand{\largewedge}{\mbox{\large $\wedge$}}
+\newcommand{\colim}{\mathrm{colim}}
+\newcommand{\pic}[1]{\mathrm{Pic}\! \left( #1  \right)}
+\newcommand{\class}[1]{\mathrm{Cl} \! \left(#1 \right)}
+\newcommand{\Div}[1]{\mathrm{div}\! \left( #1 \right)}
+\newcommand{\prDiv}[1]{\mathrm{div}\! \left[ #1 \right]}
+\newcommand{\WDIV}[1]{\mathrm{Div}_W\! \left( #1 \right)}
+\newcommand{\PDIV}[1]{\mathrm{PDiv}_W\! \left( #1 \right)}
+\newcommand{\WCl}[1]{\mathrm{Cl}_W\! \left( #1 \right)}
+\newcommand{\CaDIV}[1]{\mathrm{Div}_{\mathrm{Ca}}\! \left( #1 \right)}
+\newcommand{\PCaDIV}[1]{\mathrm{PDiv}_{\mathrm{Ca}}\! \left( #1 \right)}
+\newcommand{\CaCl}[1]{\mathrm{CaCl} \left( #1 \right)}
+\newcommand{\trivext}[2]{#1 \, \widehat{\oplus} \, #2}
+\newcommand{\rank}[2]{\mathrm{rank}_{#1}(#2)}
+\newcommand{\bdeg}[1]{\mathrm{bdeg} \, {#1}}
+\newcommand{\Com}[1]{\mathrm{Com}({#1})}
+\newcommand{\ComH}[1]{\mathrm{Com}_H({#1})}
+\newcommand{\ComC}[1]{\mathrm{Com}^C({#1})}
+\newcommand{\Ext}[4]{\mathrm{Ext}_{#1}^{#2}(#3,#4)}
+\newcommand{\EXt}[4]{\overline{\mathrm{Ext}}_{#1}^{#2}(#3,#4)}
+\newcommand{\Tor}[4]{\mathrm{Tor}_{#2}^{#1}(#3,#4)}
+\newcommand{\TOr}[4]{\overline{\mathrm{Tor}}_{#2}^{#1}(#3,#4)}
+%% Commands in Category Theory %%
+\newcommand{\zero}{\mathbf 0}
+\newcommand{\one}{\mathbf 1}
+\newcommand{\two}{\mathbf 2}
+\newcommand{\three}{\mathbf 3}
+\newcommand{\op}{\mathrm{op}}
+\newcommand{\Aa}{\operatorname{\mathbf A}}
+\newcommand{\Cc}{\operatorname{\mathbf C}}
+\newcommand{\Dd}{\operatorname{\mathbf D}}
+\newcommand{\Ee}{\operatorname{\mathbf E}}
+\newcommand{\Oo}{\operatorname{\mathbf O}}
+\newcommand{\Pp}{\operatorname{\mathbf P}}
+\newcommand{\Qq}{\operatorname{\mathbf Q}}
+\newcommand{\dom}[1]{\mathrm{dom}(#1)}
+\newcommand{\cod}[1]{\mathrm{cod}(#1)}
+\newcommand{\Nat}[2]{\mathrm{Nat}(#1,#2)}
+\newcommand{\Dom}{\mathrm{dom}}
+\newcommand{\Cod}{\mathrm{cod}}
+\newcommand{\ov}[1]{\overset{#1}{\longrightarrow}}
+\newcommand{\dov}[2]{\overset{#1}{\underset{#2}{\rightrightarrows}}}
+\newcommand{\Cat}{\mathbf{Cat}}
+\newcommand{\Pre}{\mathbf{Pre}}
+\newcommand{\AbCat}{\mathbf{Ab}\text-\mathbf{Cat}}
+\newcommand{\Set}[1]{\mathbf{Set}_{#1}}
+\newcommand{\SET}{\mathbf{Set}}
+\newcommand{\SETp}{\mathbf{Set}_*}
+\newcommand{\Finord}{\mathbf{Finord}}
+\newcommand{\Fin}{\mathbf{Fin}}
+\newcommand{\Mon}{\mathbf{Mon}}
+\newcommand{\Grp}{\mathbf{Grp}}
+\newcommand{\Rng}{\mathbf{Rng}}
+\newcommand{\Ring}{\mathbf{Ring}}
+\newcommand{\CRng}{\mathbf{CRng}}
+\newcommand{\CRing}{\mathbf{CRing}}
+\newcommand{\Ab}{\mathbf{Ab}}
+\newcommand{\RMod}[1]{#1\text-\mathbf{Mod}}
+\newcommand{\ModR}[1]{\mathbf{Mod}\text-#1}
+\newcommand{\RModS}[2]{#1\text-\mathbf{Mod}\text-#2}
+\newcommand{\Vect}[1]{\mathbf{Vect}_{#1}}
+\newcommand{\Top}{\mathbf{Top}}
+\newcommand{\Toph}{\mathbf{Toph}}
+\newcommand{\Topp}{\mathbf{Top}_*}
+\newcommand{\Topph}{\mathbf{Toph}_*}
+\newcommand{\Sch}[1]{\mathbf{Sch}_{#1}}
+\newcommand{\SCH}{\mathbf{Sch}}
+\newcommand{\Sym}[2]{\mathrm{Sym}^{#1}(#2)}
+\newcommand{\del}{\partial}
+
+%%%%% Disposition commands %%%%%
+
+\setlength{\parindent}{0 pt}
+\setlength{\parskip}{15 pt}
+\newcommand{\prg}
+{
+
+\vspace{12 pt} 
+
+}
+\renewcommand{\d}[1]{\ensuremath{ \displaystyle #1 }}
+
+%%%%% Arrows %%%%%
+
+\newcommand{\surj}{\xtwoheadrightarrow{\,}}
+\newcommand{\inj}{\xhookrightarrow{\quad}}
+
+%%%%% Titles %%%%%
+
+\title{\textbf{Category Theory}}
+\date{by Patrick Da Silva}
+\author{Personal Notes}
+\newcommand{\dateoftheday}[2]{ %[day, date]
+\newpage
+\begin{center}
+{\Large {#1}, {#2}}
+\end{center}
+}
+
+%%%%% New environments %%%%%
+
+\newcounter{env} % Environment counter
+\newcounter{chap} % Chapter counter
+\newcounter{sect}
+\newcounter{ax}
+
+%%%%%%%%%%
+%
+% Adding nothing : nothing
+% Adding t : environment + title
+% Adding h : no labelling of the environment
+% Adding th : environment + title + no labelling
+%
+%%%%%%%%%%
+
+
+\newenvironment{abb} % AntiBreakBox
+{
+	\begin{mdframed}[bottomline=false,topline=false,leftline=false,rightline=false,nobreak,leftmargin=-10 pt,rightmargin=0 pt,skipabove=0 pt,skipbelow=0 pt]
+}
+{
+	\end{mdframed}
+}
+
+
+\newenvironment{defin}	
+{\par
+	\addtocounter{env}{1}
+	\noindent \begin{abb} \textbf{\underline{Definition \thechap.\theenv.}} \par
+	\nopagebreak%
+	\par
+	\nopagebreak \itshape%
+}
+{%
+	\par
+	\end{abb}
+}
+
+\newenvironment{axiom}	
+{\par
+	\addtocounter{ax}{1}
+	\noindent \begin{abb} \textbf{\underline{Axiom \theax.}} \par
+	\nopagebreak%
+	\par
+	\nopagebreak \itshape%
+}
+{%
+	\par
+	\end{abb}
+}
+
+
+\newenvironment{definh}	
+{\par
+	\noindent \begin{abb} \textbf{\underline{Definition.}} \par
+	\nopagebreak%
+	\par
+	\nopagebreak \itshape%
+}
+{%
+	\par
+	\end{abb}
+}
+
+\newenvironment{defint}[1]	
+{\par
+	\addtocounter{env}{1}
+	\noindent \begin{abb} \textbf{\underline{Definition \thechap.\theenv.}} ({#1}) \par
+	\nopagebreak%
+	\par
+	\nopagebreak \itshape%
+}
+{%
+	\par
+	\end{abb}
+}
+
+\newenvironment{thm}	
+{\par
+	\addtocounter{env}{1}
+	\noindent \begin{abb} \textbf{\underline{Theorem \thechap.\theenv.}} \par
+	\nopagebreak%
+	\par
+	\nopagebreak \itshape%
+}
+{%
+	\par
+	\end{abb}
+}
+
+\newenvironment{thmt}[1]	
+{\par
+	\addtocounter{env}{1}
+	\noindent \begin{abb} \textbf{\underline{Theorem \thechap.\theenv.}} ({#1}) \par
+	\nopagebreak%
+	\par
+	\nopagebreak \itshape%
+}
+{%
+	\par
+	\end{abb}
+}
+
+\newenvironment{thmh}	
+{\par
+	\noindent \begin{abb} \textbf{\underline{Theorem.}} \par
+	\nopagebreak%
+	\par
+	\nopagebreak \itshape%
+}
+{%
+	\par
+	\end{abb}
+}
+
+\newenvironment{thmth}[1]	
+{\par
+	\noindent \begin{abb} \textbf{\underline{#1.}} \par
+	\nopagebreak%
+	\par
+	\nopagebreak \itshape%
+}
+{%
+	\par
+	\end{abb}
+}
+
+
+
+\newenvironment{ubung}	
+{\par
+	\noindent \begin{abb} \textbf{\underline{Exercise.}} \par
+	\nopagebreak%
+	\par
+	\nopagebreak%
+}
+{%
+	\par
+	\end{abb}
+}
+
+\newenvironment{remark}	
+{\par
+	\addtocounter{env}{1}
+	\noindent \begin{abb} \textbf{\underline{Remark \thechap.\theenv.}} \par
+	\nopagebreak%
+	\par
+	\nopagebreak%
+}
+{%
+	\par
+	\end{abb}
+}
+
+\newenvironment{remarkh}	
+{\par
+	\noindent \begin{abb} \textbf{\underline{Remark.}} \par
+	\nopagebreak%
+	\par
+	\nopagebreak%
+}
+{%
+	\par
+	\end{abb}
+}
+
+
+\newenvironment{remarkt}[1]	
+{\par
+	\addtocounter{env}{1}
+	\noindent \begin{abb} \textbf{\underline{Remark \thechap.\theenv.} (#1)} \par
+	\nopagebreak%
+	\par
+	\nopagebreak%
+}
+{%
+	\par
+	\end{abb}
+}
+
+
+\newenvironment{ruleh}	
+{\par
+	\noindent \begin{abb} \textbf{\underline{Rule.}} \par
+	\nopagebreak%
+	\par
+	\nopagebreak%
+}
+{%
+	\par
+	\end{abb}
+}
+
+\newenvironment{notation}	
+{\par
+	\addtocounter{env}{1}
+	\noindent \begin{abb} \textbf{\underline{Notation \thechap.\theenv.}} \par
+	\nopagebreak%
+	\par
+	\nopagebreak%
+}
+{%
+	\par
+	\end{abb}
+}
+
+\newenvironment{notationh}	
+{\par
+	\noindent \begin{abb} \textbf{\underline{Notation.}} \par
+	\nopagebreak%
+	\par
+	\nopagebreak%
+}
+{%
+	\par
+	\end{abb}
+}
+
+\newenvironment{example}	
+{\par
+	\addtocounter{env}{1}
+	\noindent \textbf{\underline{Example \thechap.\theenv.}} \par
+	\nopagebreak%
+	\par
+	\nopagebreak \itshape%
+}
+{%
+	\par
+}
+
+\newenvironment{exampleh}	
+{\par
+	\noindent \textbf{\underline{Example.}} \par
+	\nopagebreak%
+	\par
+	\nopagebreak \itshape%
+}
+{%
+	\par
+}
+
+\newenvironment{examplet}[1]	
+{\par
+	\addtocounter{env}{1}
+	\noindent \textbf{\underline{Example \thechap.\theenv.}} ({#1}) \par
+	\nopagebreak%
+	\par
+	\nopagebreak \itshape%
+}
+{%
+	\par
+}
+
+\newenvironment{exampleth}[1]	
+{\par
+	\noindent \textbf{\underline{Example.}} ({#1}) \par
+	\nopagebreak%
+	\par
+	\nopagebreak \itshape%
+}
+{%
+	\par
+}
+
+\newenvironment{examples}	
+{\par
+	\addtocounter{env}{1}
+	\noindent \textbf{\underline{Examples \thechap.\theenv.}} \par
+	\nopagebreak%
+	\par
+	\nopagebreak \itshape%
+}
+{%
+	\par
+}
+
+\newenvironment{examplesh}	
+{\par
+	\noindent \textbf{\underline{Examples.}} \par
+	\nopagebreak%
+	\par
+	\nopagebreak \itshape%
+}
+{%
+	\par
+}
+
+\newenvironment{examplest}[1]	
+{\par
+	\addtocounter{env}{1}
+	\noindent \textbf{\underline{Examples \thechap.\theenv.}} ({#1}) \par
+	\nopagebreak%
+	\par
+	\nopagebreak \itshape%
+}
+{%
+	\par
+}
+
+\newenvironment{examplesth}[1]	
+{\par
+	\noindent \textbf{\underline{Examples.}} ({#1}) \par
+	\nopagebreak%
+	\par
+	\nopagebreak \itshape%
+}
+{%
+	\par
+}
+
+
+
+
+
+\newenvironment{prop}	
+{\par
+	\addtocounter{env}{1}
+	\noindent \begin{abb} \textbf{\underline{Proposition \thechap.\theenv.}} \par
+	\nopagebreak%It so turns out that if we write
+	\par
+	\itshape%
+}
+{%
+	\par
+	\end{abb}
+}
+
+\newenvironment{proph}	
+{\par
+	\noindent \begin{abb} \textbf{\underline{Proposition.}} \par
+	\nopagebreak%It so turns out that if we write
+	\par
+	\itshape%
+}
+{%
+	\par
+	\end{abb}
+}
+
+\newenvironment{propt}[1]	
+{\par
+	\addtocounter{env}{1}
+	\noindent \begin{abb} \textbf{\underline{Proposition \thechap.\thethm.}} ({#1}) \par
+	\nopagebreak%
+	\par
+	\itshape%
+}
+{%
+	\par
+	\end{abb}
+}
+
+\newenvironment{lem}	
+{\par
+	\addtocounter{env}{1}
+	\noindent \begin{abb} \textbf{\underline{Lemma \thechap.\theenv.}} \par
+	\nopagebreak%
+	\par
+	\itshape%
+}
+{%
+	\par
+	\end{abb}
+}
+
+
+\newenvironment{lemh}	
+{\par
+	\noindent \begin{abb} \textbf{\underline{Lemma.}} \par
+	\nopagebreak%
+	\par
+	\itshape%
+}
+{%
+	\par
+	\end{abb}
+}
+
+
+\newenvironment{lemt}[1]	
+{\par
+	\addtocounter{env}{1}
+	\noindent \begin{abb} \textbf{\underline{Lemma \thechap.\theenv.}} ({#1}) \par
+	\nopagebreak%
+	\par
+	\itshape%
+}
+{%
+	\par
+	\end{abb}
+}
+
+\newenvironment{cor}
+{\par
+	\addtocounter{env}{1}
+	\noindent \begin{abb} \textbf{\underline{Corollary \thechap.\theenv.}} \par
+	\nopagebreak%
+	\par
+	\itshape%
+}
+{%
+	\par
+	\end{abb}
+}
+
+\newenvironment{corh}
+{\par
+	\noindent \begin{abb} \textbf{\underline{Corollary.}} \par
+	\nopagebreak%
+	\par
+	\itshape%
+}
+{%
+	\par
+	\end{abb}
+}
+
+\newenvironment{cort}[1]
+{\par
+	\addtocounter{env}{1}%
+	\noindent \begin{abb} \textbf{\underline{Corollary \thechap.\theenv.}} ({#1}) \par
+	\nopagebreak%
+	\par
+	\itshape%
+}
+{%
+	\par
+	\end{abb}
+}
+
+\renewenvironment{proof}
+{\par
+	\begin{mdframed}[skipabove=12 pt,bottomline=false,topline=false,rightline=false]%
+	\noindent \textit{\textbf{Proof.}} 
+}
+{%
+	\end{mdframed}\par
+	\begin{flushright} \vspace{-35 pt} $\square$ \end{flushright}
+	\vspace{-20 pt}
+}
+
+
+%%%%% Labels made out of counters %%%%%
+
+\makeatletter
+
+\newcommand*{\labelling}[1] % To create a label, simply type \labelling{labelnamehere}.
+{%
+  \edef\@currentlabel{\csname theenv\endcsname}% Store current counter value in \@currentlabel
+  \label{#1}% Store label
+
+  \edef\@currentlabel{\csname thechap\endcsname}% Store current counter value in \@currentlabel
+  \label{#1chap}% Store label
+}
+
+\makeatother
+
+\newcommand{\lref}[1]{\ref{#1chap}.\ref{#1}} % To reference to it, simply use \lref{labelnamehere} (lref : label reference).
+
+\newcommand{\newchap}[1]{ 
+\newpage
+\phantom{x}
+\newpage
+\begin{center}
+	\textbf{\Large \underline{#1}}
+\end{center}
+\addtocounter{chap}{1}
+\setcounter{sect}{0}
+\setcounter{env}{0}
+}
+
+\newcommand{\newsect}[1]{
+	\addtocounter{sect}{1}
+	{\large \thesect. \underline{#1}}
+}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% SETTING LABELS WITH COUNTERS %%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% To set where the label should refer to
+%% with a customized label name, 
+%% if some theorem uses the counter ``thm'' 
+%% as its numbering, in the theorem 
+%% (or lemma/corollary/proposition) 
+%% environment, write
+%% %% %% %% %% %% %% %% %% %% %% %%
+%%
+%% \labelling{labelnamehere}{thm}
+%%
+%% %% %% %% %% %% %% %% %% %% %% %%
+%% right after the \begin. To refer to 
+%% this label, simply type \ref{labelnamehere}
+%% where the reference should be.
+%% Only use the same name once, otherwise 
+%% there will be errors with \label.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Environment counters : 
+%% lem : thm
+%% cor : thm
+%% thm : thm
+%% defin : def
+%% example : ex
+%% examples : none for now
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+\begin{document}
+\begin{definh}
+    A (mathematical) \textbf{time series} is a function $f: \Z \to \R$. In practice, time series are represented over a finite time interval, taking values at equally separated discrete time steps. We can turn such a time series encountered in practice by mapping the given values to $\Z$ in a linear fashion, and extending the time series to the left by its first value, and to the right by its last value.  
+\end{definh}
+
+\begin{definh}
+    Let $k \ge 1$ be an integer and $x$ denote a time series and denote its value at time $t \in \Z$ by $x_t$. The \textbf{moving average of window $k$} is defined as the following time series:
+    \[
+        M^k(x)_t \defn \sum_{i = -\infty}^{\infty} x_{t-i} m_i^k
+    \]
+    where
+    \[
+        m_i^k \defn
+        \begin{cases}
+            \frac 1{2k+1}   & \text{ if } |i| \le k \\
+            0               & \text{ if } |i| > k.
+        \end{cases}
+    \]
+    If we denote by $x * y$ the \textbf{convolution} operation of two time series:
+    \[
+        (x * y)_t = \sum_{i=-\infty}^{\infty} x_{t-i} y_i,
+    \]
+    then $M^k(x)_t = (x * m^k)_t$ where $m^k$ is the time series defined above.
+\end{definh}
+
+We want to study what happens when we compute the moving average of a moving average. 
+
+\begin{proph}
+    Convolution is commutative and associative, i.e. for three time series $x,y,z : \Z \to \R$, we have
+    \[
+            x * y = y * z, \qquad (x * y) * z = x * (y * z).
+    \]
+\end{proph}
+
+\begin{proof}
+    Let us first consider commutativity. For $t \in \Z$, we have 
+    \begin{gather*}
+        \begin{aligned}
+            (x * y)_t
+                & = \sum_{i=-\infty}^{\infty} x_{t-i} y_i \\
+                & = \underset{i+j = t}{\sum_{(i,j) \in \Z^2}} x_j y_i \\
+                & = \underset{i+j = t}{\sum_{(i,j) \in \Z^2}} x_i y_j \\
+        \end{aligned}
+    \end{gather*}
+    The latter is symmetric in $x$ and $y$, so the operation is commutative. As for associativity,
+    \begin{gather*}
+        \begin{aligned}
+            ((x * y) * z)_t 
+                & = \underset{\ell+k = t}{\sum_{(\ell,k) \in \Z^2}} (x * y)_{\ell} z_k \\
+                & = \underset{\ell+k = t}{\sum_{(\ell,k) \in \Z^2}} \left( \underset{i+j = \ell}{\sum_{(i,j) \in \Z^2}} x_i y_j  \right) z_k \\
+                & = \underset{i+j+k = t}{\sum_{(i,j,k) \in \Z^3}} x_i y_j z_k.
+        \end{aligned}
+    \end{gather*}
+    The latter expression is symmetric in $x$,$y$ and $z$, so since the operation is also commutative, we have
+    \[
+        (x * y) * z = (y * z) * x = x * (y * z). 
+    \]        
+\end{proof}
+
+\begin{corh}
+    Let $k,\ell \ge 1$ be two positive integers and $x$ a time series. The moving average of window $k$ of the moving average of window $\ell$ is a convolution with a fixed time series:
+    \[
+        M^k(M^{\ell}(x))_t = M^{\ell}(M^k(x))_t = x * m^{\ell,k}
+    \]
+    with 
+    \[
+        m^{\ell,k}_t \defn \frac 1{(2k+1)(2\ell+1)} \left(
+            \begin{cases}
+                2 \min \{\ell, k\} + 1                      & \text{ if } |t| \le |\ell - k|                \\
+                2 \min \{\ell, k\} + 1 - (|t| - |\ell - k|) & \text{ if } |\ell - k| \le |t| \le \ell + k   \\
+                0                                           & \text{ if } |t| > |\ell - k|. 
+            \end{cases}
+        \right)
+    \]
+\end{corh}
+
+\begin{proof}
+    By the properties of convolution, we have
+    \[
+        M^k(M^{\ell}(x)) = (x * m^k) * m^{\ell} = x * (m^k * m^{\ell}).
+    \]
+    By the commutativity of convolution, we already deduce that $M^k(M^{\ell}(x)) = M^{\ell}(M^k(x))$ and that $m^{\ell,k} \defn m^k * m^{\ell}$ is the time series we are looking for. \\
+
+    Given $t \in \Z$, we want to compute the sum 
+    \[
+        m^{\ell,k}_t = \underset{i+j = t}{\sum_{(i,j) \in \Z^2}} m_i^k m_j^{\ell}.
+    \]
+    We have $i+j = t$ if and only if $(-i) + (-j) = -t$ and $m_i^k m_j^k = m_{-i}^k m_{-j}^k$, from which we deduce that $m^{\ell,k}_t = m^{\ell,k}_{-t}$. So it suffices to compute $m^{\ell,k}_t$ for $t \ge 0$. 
+
+    Without loss of generality, assume $\ell \ge k$. For $0 \le t \le \ell - k$, since $|i| \le k$ implies $|t-i| \le |t| + |i| = (\ell -k) + k = \ell$, we have
+    \[
+        m^{\ell,k}_t = \sum_{i=-\infty}^{\infty} m_i^k m_{t-i}^{\ell} = \sum_{i=-k}^k m_{t-i}^{\ell} =\sum_{i=-k}^k \frac 1{2k+1} = 1.
+    \]
+    Now suppose $\ell - k \le t \le \ell + k$. Our objective is to show that
+    \begin{gather*}
+        \begin{aligned}
+            (2k+1)(2\ell+1) m^{\ell,k}_t 
+                & = 2 \min\{\ell,k\} + 1 - (|t| - |\ell - k|)   \\
+                & = 2k + 1 - (t - (\ell - k))                   \\
+                & = k + 1 + (\ell - t)                          \\
+        \end{aligned}
+    \end{gather*}
+    Suppose $t \le \ell$. Since $\ell \ge k$, we know that $|t - k| \le \ell$ (because $0 \le k,t \le \ell$), thus $-\ell \le t-k \le t \le \ell$. Also, $\ell - k \le t$ implies $\ell \le t+k$. Therefore,
+    \begin{gather*}
+        \begin{aligned}
+        (2k+1)(2\ell+1) m^{\ell,k}_t 
+            & = \sum_{i=-\infty}^{\infty} ((2k+1) m_i^k) ((2\ell+1)m_{t-i}^{\ell})                \\
+            & = \sum_{i=-k}^k (2\ell+1) m_{t-i}^{\ell}                                            \\
+            & = \sum_{i=-k}^k (2\ell+1)m_{t+i}^{\ell}                                             \\
+            & = \sum_{i=t-k}^{t+k} (2\ell+1)m_i^{\ell}                                            \\
+            & = \sum_{i=t-k}^t (2\ell+1)m_i^{\ell} + \sum_{i=t+1}^{t+k} (2\ell+1)m_i^{\ell}       \\
+            & = (k+1) + (\ell - t).
+        \end{aligned}
+    \end{gather*}
+    Now suppose $t \ge \ell$. Since $t \le \ell + k$, we have $t - k \le \ell$. This implies
+    \begin{gather*}
+        \begin{aligned}
+            (2k+1)(2\ell+1) m^{\ell,k}_t 
+                & = \sum_{i=t-k}^{t+k} (2\ell+1) m_i^{\ell}   \\
+                & = \sum_{i=t-k}^t (2\ell+1)m_i^{\ell} + \underbrace{\sum_{i=t+1}^{t+k} (2\ell+1) m_i^{\ell}}_{= 0} \\
+                & = \sum_{i=t-k}^{\ell} (2\ell+1) m_i^{\ell}    \\
+                & = \ell - (t-k) + 1 = (k+1) + (\ell - t).
+        \end{aligned}
+    \end{gather*}
+    Finally, if $t > \ell + k$, then $t-k > \ell$, which means that
+    \[
+        (2k+1)(2\ell+1)m^{\ell,k}_t = \sum_{i=t-k}^{t+k} (2\ell+1) m_i^{\ell} = 0.
+    \]
+\end{proof}
+
+\begin{proph}
+    Let $x,y : \Z \to \R$ be two time series, and suppose that at least one of $x$ or $y$ takes only finitely many non-zero values. Then
+    \[
+        \sum_{t=-\infty}^{\infty} (x * y)_t = \left( \sum_{t=-\infty}^{\infty} x_t \right) \left( \sum_{t=-\infty}^{\infty} y_t \right).
+    \]
+\end{proph}
+
+\begin{proof}
+    We can re-write the expression on the left:
+    \begin{gather*}
+        \begin{aligned}
+            \sum_{t=-\infty}^{\infty} m_t^{\ell,k} 
+                & = \sum_{t=-\infty}^{\infty} \sum_{i=-\infty}^{\infty} x_i y_{t-i} \\
+                & = \sum_{i=-\infty}^{\infty} \sum_{j=-\infty}^{\infty} x_i y_j \\
+                & = \left( \sum_{i=-\infty}^{\infty} x_i \right) \left( \sum_{j=-\infty}^{\infty} y_j \right) \\
+        \end{aligned}
+    \end{gather*}
+    The re-indexing of the sum is just a change of variables ($j=t-i$) and the last equality is justified by the fact that one of the sum is finite.
+\end{proof}
+
+\begin{corh}
+    Let $k,\ell \ge 1$ be two positive integers and $x$ be a time series. Then
+    \[
+        \sum_{t=-\infty}^{\infty} M^k(x)_t = \sum_{t=-\infty}^{\infty} x_t.
+    \]
+    In particular, we have
+    \[
+        \sum_{t=-\infty}^{\infty} m_t^k = 1 = \sum_{t=-\infty}^{\infty} m_t^{\ell,k}.
+    \]
+\end{corh}
+
+\begin{proof}
+    We begin by proving that $\sum_{t=-\infty}^{\infty} m_t^k = 1$, which is a simple computation~:
+    \[
+        \sum_{t=-\infty}^{\infty} m_t^k = \sum_{t=-k}^k \frac 1{2k+1} = \frac 1{2k+1} \left(2k+1\right) = 1.
+    \]
+    As for the main result, noting that $M^k(x) = x * m^k$, we see that
+    \[
+        \sum_{t=-\infty}^{\infty} M^k(x)_t = \left(\sum_{t=-\infty}^{\infty} x_t\right)\left(\sum_{t=-\infty}^{\infty} m_t^k\right) = \sum_{t=-\infty}^{\infty} x_t.
+    \]
+    The last result follows from the fact that $m^{\ell,k}_t = M^{\ell}(m^k_t)$.
+\end{proof} 
+
+\end{document}
